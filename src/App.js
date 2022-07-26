@@ -1,11 +1,15 @@
-import React from "react";
-import { BrowserRouter, Router } from "react-router-dom";
-import Login from "./components/Login";
-import { AppProvider } from "./contexts";
+import { ChakraProvider } from "@chakra-ui/react";
+import { BrowserRouter } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import Routes from "./routes";
 
-const App = () => (
-  <BrowserRouter>
-    <Login />
-  </BrowserRouter>
-);
-export default App;
+export const App = () => {
+  return (
+    <ChakraProvider>
+      <BrowserRouter>
+        <ToastContainer />
+        <Routes />
+      </BrowserRouter>
+    </ChakraProvider>
+  );
+};
