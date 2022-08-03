@@ -4,7 +4,7 @@ import { AuthProvider } from "./Auth";
 export const AppProvider = () => {
     return (
       <AuthProvider>
-
+        
       </AuthProvider>
     );
   };
