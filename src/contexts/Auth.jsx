@@ -1,7 +1,8 @@
 import { api } from "../services/api";
 import { toast } from "react-toastify";
-import React from "react";
-export const GroupsContext = React.createContext({});
+import React , {createContext}from "react";
+
+export const AuthContext = createContext();
 
 export function useAuth() {
   const Login = async (data) => {
