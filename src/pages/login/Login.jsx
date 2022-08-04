@@ -14,8 +14,37 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react';
-
+import { api } from "../../services/api";
+import { toast } from "react-toastify";
+import { useToast } from '@chakra-ui/react'
 export default function Login() {
+  const toast = useToast();  
+    const Login = async (data) => {
+      try {
+        const response = await api.post("/login", data)
+        if (response.status === 200) {
+          localStorage.setItem("authToken", response?.data?.token);
+          toast({
+            title: 'Usuário Logado!',
+            description: "Aproveite nosso sistema.",
+            status: 'success',
+            duration: 9000,
+            isClosable: true,
+          })
+        }
+        return response;
+      } catch (error) {
+        JSON.stringify(error)
+        console.log(error.data)
+        toast({
+          title: 'Deu algo errado',
+          status: 'error',
+          isClosable: true,
+        })
+        return error;
+      }
+    };
+  
   return (
     <Flex
       maxH={'100vh'}
@@ -51,7 +80,9 @@ export default function Login() {
                 <Checkbox>Remember me</Checkbox>
                 <Link color={'blue.400'}>Forgot password?</Link>
               </Stack>
+              
               <Button
+               onClick={Login}
                 bg={'blue.400'}
                 color={'white'}
                 _hover={{
