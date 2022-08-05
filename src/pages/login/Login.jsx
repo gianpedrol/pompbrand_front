@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useContext, useState} from "react";
 import './login.scss';
 import {
   Flex,
@@ -14,37 +14,22 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { api } from "../../services/api";
-import { toast } from "react-toastify";
-import { useToast } from '@chakra-ui/react'
-export default function Login() {
-  const toast = useToast();  
-    const Login = async (data) => {
-      try {
-        const response = await api.post("/login", data)
-        if (response.status === 200) {
-          localStorage.setItem("authToken", response?.data?.token);
-          toast({
-            title: 'Usuário Logado!',
-            description: "Aproveite nosso sistema.",
-            status: 'success',
-            duration: 9000,
-            isClosable: true,
-          })
-        }
-        return response;
-      } catch (error) {
-        JSON.stringify(error)
-        console.log(error.data)
-        toast({
-          title: 'Deu algo errado',
-          status: 'error',
-          isClosable: true,
-        })
-        return error;
-      }
-    };
-  
+import { AuthContext } from "../../contexts/Auth";
+
+const  Login = () => {
+
+  const {authenticated, login, loading} = useContext(AuthContext);
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        console.log("submit", {email, password});
+
+        login(email, password);
+    }
   return (
     <Flex
       maxH={'100vh'}
@@ -59,18 +44,20 @@ export default function Login() {
           </Text>
         </Stack>
         <Box
+          as="form"
+          onSubmit={handleSubmit}
           rounded={'lg'}
           bg={useColorModeValue('white', 'gray.700')}
           boxShadow={'lg'}
           p={8}>
           <Stack spacing={4}>
-            <FormControl id="email">
+              <FormControl id="email">
               <FormLabel>Email address</FormLabel>
-              <Input type="email" />
+              <Input type="email"  value={email} onChange={(e) => setEmail(e.target.value)}/>
             </FormControl>
             <FormControl id="password">
               <FormLabel>Password</FormLabel>
-              <Input type="password" />
+              <Input type="password"  value={password} onChange={(e) => setPassword(e.target.value)} />
             </FormControl>
             <Stack spacing={10}>
               <Stack
@@ -82,7 +69,7 @@ export default function Login() {
               </Stack>
               
               <Button
-               onClick={Login}
+              type="submit"
                 bg={'blue.400'}
                 color={'white'}
                 _hover={{
@@ -98,3 +85,4 @@ export default function Login() {
   );
 }
 
+export default Login;

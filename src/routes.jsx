@@ -1,27 +1,45 @@
-import React, {useState} from "react";
-import { Route, Routes } from "react-router-dom";
+import React, {useContext} from "react";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Login from "./pages/login/Login";
 import HomeMaster from "./pages/home/HomeMaster";
-import {AuthContext} from "./contexts/Auth"
+import { AuthProvider, AuthContext } from './contexts/Auth'
+import { Spinner } from '@chakra-ui/react';
 
 
 function Router() {
-  const [user, setUser] = useState(null);
-  const login = (email, password) => {
-    console.log('login', { email, password});
-    setUser({id: '123', email});
-  }
-  const logout = () => {
-    console.log('logout')
-  }
+
+  const Private = ({children}) => {
+    const {authenticated, loading} = useContext(AuthContext);
+    if(loading){
+        return (
+          <Spinner
+          thickness='4px'
+          speed='0.65s'
+          emptyColor='gray.200'
+          color='blue.500'
+          size='xl'
+        />
+          )
+    }
+    if(!authenticated){
+        return <Navigate to="/login "/>
+    }
+
+    return children;
+}
   return (
-    <AuthContext.Provider value={{authenticated: !!user, user, login}}>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/home" element={<HomeMaster />} />
-      </Routes>
-    </AuthContext.Provider>
-  );
+        <AuthProvider>
+        <Routes>
+          <Route exact path='/login' element={<Login />}/>
+          <Route path='/' element={
+                  <Private>
+                      <HomeMaster />
+                  </Private>
+              } />
+         </Routes>
+      </AuthProvider>
+   
+    );
 }
 
 export default Router;
