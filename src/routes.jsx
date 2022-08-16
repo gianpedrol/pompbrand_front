@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import Login from "./pages/login/Login";
 import HomeMaster from "./pages/home/HomeMaster";
@@ -8,18 +8,25 @@ import { Spinner } from '@chakra-ui/react';
 
 function Router() {
 
+
+
   const Private = ({children}) => {
     const {authenticated, loading} = useContext(AuthContext);
+
     if(loading){
-        return (
-          <Spinner
-          thickness='4px'
-          speed='0.65s'
-          emptyColor='gray.200'
-          color='blue.500'
-          size='xl'
-        />
-          )
+      setTimeout(() => {
+        if(loading){
+          return (
+            <Spinner
+            thickness='4px'
+            speed='0.65s'
+            emptyColor='gray.200'
+            color='blue.500'
+            size='xl'
+          />
+            )
+      }
+      }, 3000)
     }
     if(!authenticated){
         return <Navigate to="/login "/>

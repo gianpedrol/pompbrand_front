@@ -15,10 +15,11 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { AuthContext } from "../../contexts/Auth";
+import Logo from '../../images/logo-sidebar.png'
 
 const  Login = () => {
 
-  const {authenticated, login, loading} = useContext(AuthContext);
+  const {login, loading} = useContext(AuthContext);
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -32,16 +33,15 @@ const  Login = () => {
     }
   return (
     <Flex
-      maxH={'100vh'}
+      H={'100vh'}
       align={'center'}
       justify={'center'}
-      bg={useColorModeValue('gray.50', 'gray.800')}>
+      bg='#6E7C7C'>
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
         <Stack align={'center'}>
-          <Heading fontSize={'4xl'}>Sign in to your account</Heading>
-          <Text fontSize={'lg'} color={'gray.600'}>
-            to enjoy all of our cool <Link color={'blue.400'}>features</Link> ✌️
-          </Text>
+          <Heading fontSize={'4xl'}>
+          <img src={Logo} alt="" srcset="" />
+            </Heading>
         </Stack>
         <Box
           as="form"
@@ -70,10 +70,11 @@ const  Login = () => {
               
               <Button
               type="submit"
-                bg={'blue.400'}
-                color={'white'}
+                bg='#B4FE5B'
+                color='#6E7C7C'
                 _hover={{
-                  bg: 'blue.500',
+                  bg: '#6E7C7C',
+                  color : 'white'
                 }}>
                 Sign in
               </Button>
