@@ -2,7 +2,7 @@ import React, {useContext}from "react";
 import { AuthContext } from "../../contexts/Auth";
 import { api } from "../../services/api";
 import { Flex, Spacer, Box } from '@chakra-ui/react';
-import Header  from "../../components/Header/Header";
+import Header  from "../../components/Header/header";
 import Sidebar  from '../../components/Sidebar/Sidebar';
 import './HomeMaster.scss';
 
