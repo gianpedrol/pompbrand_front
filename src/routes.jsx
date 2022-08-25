@@ -1,37 +1,20 @@
-import React, {useContext, useEffect} from "react";
+import React, {useContext} from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import Login from "./pages/login/Login";
 import HomeMaster from "./pages/home/HomeMaster";
 import { AuthProvider, AuthContext } from './contexts/Auth'
-import { Spinner } from '@chakra-ui/react';
+import ListPhases from "./pages/phases/ListPhases";
 
 
 function Router() {
 
-
-
   const Private = ({children}) => {
-    const {authenticated, loading} = useContext(AuthContext);
+    const {user} = useContext(AuthContext);
+     const token = localStorage.getItem('token');
 
-    if(loading){
-      setTimeout(() => {
-        if(loading){
-          return (
-            <Spinner
-            thickness='4px'
-            speed='0.65s'
-            emptyColor='gray.200'
-            color='blue.500'
-            size='xl'
-          />
-            )
-      }
-      }, 3000)
-    }
-    if(!authenticated){
+    if(token === null || user === false){
         return <Navigate to="/login "/>
     }
-
     return children;
 }
   return (
@@ -41,6 +24,11 @@ function Router() {
           <Route path='/' element={
                   <Private>
                       <HomeMaster />
+                  </Private>
+              } />
+              <Route path='/phases' element={
+                  <Private>
+                      <ListPhases />
                   </Private>
               } />
          </Routes>

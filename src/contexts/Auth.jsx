@@ -1,4 +1,5 @@
-import { api } from "../services/api";
+import  api from "../services/api";
+import axios from "axios";
 import  {createContext, useEffect, useState} from "react";
 import { useToast } from '@chakra-ui/react';
 import {useNavigate } from "react-router-dom";
@@ -11,6 +12,7 @@ export const AuthProvider = ({children}) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+
   useEffect(()=> {
       const recoveredUser = localStorage.getItem('user');
       const token = localStorage.getItem('token');
@@ -19,7 +21,7 @@ export const AuthProvider = ({children}) => {
           api.defaults.headers.Authorization = `Bearer ${token}` 
       }
 
-        setLoading(false);
+      setLoading(false);
 
   }, []);
 
@@ -32,12 +34,12 @@ export const AuthProvider = ({children}) => {
       const token = response.data.token;
 
       localStorage.setItem("user", JSON.stringify(loggedUser));
-      localStorage.setItem("token", JSON.stringify(token));        
-
+      localStorage.setItem("token", token);
+            
       setUser(loggedUser);
       navigate("/");
       if (response.status === 200) {
-        localStorage.setItem("authToken", response?.data?.token);
+
         toast({
           title: 'Usuário Logado!',
           description: "Aproveite nosso sistema.",

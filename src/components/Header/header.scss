@@ -26,16 +26,60 @@ div.sidebar{
     border-radius: 0px 15px 15px 0px;
 }
 
-button.logout{
-    background-color: #B4FE5B;
+
+.footer-sidebar{
+    bottom: 26px;
     position: absolute;
-    bottom: 15px;
-    left: 35px;
-    padding: 5px 30px;
-    border-radius: 8px;
+    width: 100%;
+    padding: 0 15px;
     text-align: center;
+    .horas {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 20px;
+        margin-bottom: 20px ;
+      }
+    button.logout{
+        background-color: #B4FE5B;
+        padding: 5px 30px;
+        border-radius: 8px;
+        text-align: center;
+        color: #6E7C7C;    
+    }
 
 }
 
+.links{
+    text-align: left;
+    color: #B4FE5B;
+    font-weight: 600;
+    margin-top: 30px;
+}
+
+ul{
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    margin-left: 50px;
+}
+
+ul li a{
+    margin-left: 30px;
+    display: inline-flex;
+    align-items: center;
+    padding: 8px;
+}
+
+ul li a span{
+    padding-left: 8px;
+}
+
+.menu-icon{
+    font-size: 30px;
+    color: #B4FE5B;
+}
 
 

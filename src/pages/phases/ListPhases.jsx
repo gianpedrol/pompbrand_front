@@ -1,9 +1,10 @@
 import React from "react";
-import { getUsers } from "../../services/api";
+import { getPhases } from "../../services/api";
 import { Flex, Box, Spinner, Container } from '@chakra-ui/react';
 import Header  from "../../components/Header/Header";
-import './HomeMaster.scss';
+import './phases.scss';
 import { useEffect, useState } from "react";
+
 import {
   Table,
   Thead,
@@ -14,27 +15,27 @@ import {
   TableContainer,
 } from '@chakra-ui/react';
 
-export default function HomeMaster() {
-    const [users, setUsers] = useState();
+export default function ListPhases() {
+    const [phases, setPhases] = useState();
     const [spinner, setSpinner] = useState(false);
 
-    async function getUsersList() {
+    async function getPhasesList() {
       setSpinner(true);
       try {
-        const users = await getUsers();               
-        setUsers(users.data?.data);
-
+        const phases = await getPhases();               
+        setPhases(phases.data);
       } catch (error) {
         console.log(error);
       }
-      setTimeout(() => {
+      setSpinner(false)
+     /* setTimeout(() => {
         setSpinner(false)
-      }, 5000)  ;
+      }, 2000)  ;*/
     }
     
   useEffect(() => {
 
-      getUsersList();
+     getPhasesList()
 
   }, []);
 
@@ -72,25 +73,21 @@ export default function HomeMaster() {
               <Box mt='155'>
               <Container>
                 <Box width='80vw' maxHeight='350px'>
-                  <h1>Meus Clientes</h1>
+                  <h1>Fases Cadastradas</h1>
                   <TableContainer>
-                    <Table width='100%' variant='striped' colorScheme='#B4FE5B'>
+                    <Table width='100%' variant='striped'  colorScheme='#B4FE5B'>
                       <Thead>
                         <Tr>
-                          <Th>Name</Th>
-                          <Th>Email</Th>
-                          <Th></Th>
+                          <Th>Fase</Th>
+                          <Th> Editar </Th>
                         </Tr>
                       </Thead>
                       <Tbody>
-                        
-                      {users?.map((user, index) => (    
+                        {console.log(phases)}
+                      {phases?.map((phase, index) => (  
                         <Tr key={index}>
-                          <Td>{user?.name}</Td>
-                          <Td>{user?.email}</Td>
+                          <Td>{phase?.phase_name}</Td>
                             <Td>
-                              <p>{user?.stage?.phase_name}</p>
-                              { user?.stage?.StageStatus === 0 ? <p>Não Concluído</p> : user?.stage?.StageStatus === 1 ? <p>Concluído</p> : ''}
                             </Td>    
                          </Tr>
                       ))}                   
