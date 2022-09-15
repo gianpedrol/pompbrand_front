@@ -4,12 +4,14 @@ import Login from "./pages/login/Login";
 import HomeMaster from "./pages/home/HomeMaster";
 import { AuthProvider, AuthContext } from './contexts/Auth'
 import ListPhases from "./pages/phases/ListPhases";
+import ShowPhase from "./pages/phases/ShowPhase";
+import ShowUser from "./pages/users/ShowUser";
 
 
 function Router() {
 
   const Private = ({children}) => {
-    const {user} = useContext(AuthContext);
+    const {user,authenticated } = useContext(AuthContext);
      const token = localStorage.getItem('token');
 
     if(token === null || user === false){
@@ -31,10 +33,20 @@ function Router() {
                       <ListPhases />
                   </Private>
               } />
+             <Route path='/phase/:id' element={
+                  <Private>
+                      <ShowPhase />
+                  </Private>
+              } />
+            <Route path='/user/:id' element={
+                  <Private>
+                      <ShowUser />
+                  </Private>
+              } />
          </Routes>
       </AuthProvider>
    
-    );
+    )
 }
 
 export default Router;

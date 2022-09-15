@@ -1,5 +1,6 @@
 import React from "react";
 import { getUsers } from "../../services/api";
+import { Link } from "react-router-dom";
 import { Flex, Box, Spinner, Container } from '@chakra-ui/react';
 import Header  from "../../components/Header/Header";
 import './HomeMaster.scss';
@@ -92,6 +93,11 @@ export default function HomeMaster() {
                               <p>{user?.stage?.phase_name}</p>
                               { user?.stage?.StageStatus === 0 ? <p>Não Concluído</p> : user?.stage?.StageStatus === 1 ? <p>Concluído</p> : ''}
                             </Td>    
+                            <Td>
+                              <Link to={`/user/${user?.id}`}>
+                                Ver
+                              </Link>
+                            </Td>
                          </Tr>
                       ))}                   
 

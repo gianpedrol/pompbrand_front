@@ -9,9 +9,9 @@ export const AuthContext = createContext();
 export const AuthProvider = ({children}) => {
   const toast = useToast();
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
-
+  const [authenticated, setAuthenticated] = useState();
 
   useEffect(()=> {
       const recoveredUser = localStorage.getItem('user');
@@ -39,7 +39,7 @@ export const AuthProvider = ({children}) => {
       setUser(loggedUser);
       navigate("/");
       if (response.status === 200) {
-
+        setAuthenticated(true);
         toast({
           title: 'Usuário Logado!',
           description: "Aproveite nosso sistema.",
@@ -47,6 +47,12 @@ export const AuthProvider = ({children}) => {
           duration: 9000,
           isClosable: true,
         })
+        
+     if(token){
+       window.onload = function() {
+       authenticated = true;         
+      };
+   }
       }
       return response;
     } catch (error) {
@@ -67,12 +73,13 @@ export const AuthProvider = ({children}) => {
      localStorage.removeItem('token');
      api.defaults.headers.Authorization = null 
      setUser(null);
+     setAuthenticated(false);
      navigate("/login");
 
   }
 
   return(
-      <AuthContext.Provider value={{authenticated: !!user, user,loading, login, logout }}>
+      <AuthContext.Provider value={{ user,loading,authenticated:!!user, login, logout }}>
           {children}
       </AuthContext.Provider>
   )
