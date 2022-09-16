@@ -27,6 +27,7 @@ import {
   useDisclosure,
   FormControl,
   FormLabel,
+  SimpleGrid,
   Input
 
 } from '@chakra-ui/react';
@@ -134,104 +135,77 @@ export default function ListPhases() {
         <>
       
      <Flex width="100%" minHeight="100vh">   
-    {
-      spinner && ( 
-        <div className="spinner">
-          <div>
-          <Spinner
-          position='absolute'
-          top='35%'
-          left='35%'
-          thickness='4px'
-          speed='0.65s'
-          bg='white'
-          emptyColor='gray.200'
-          color='blue.500'
-          size='xl'
-        /> 
-          </div>
-        </div>   
-
-
-    )
-   
-    }
      <Flex>
        <Header/>
      </Flex>
-              <Box mt='155'>
-              <Container>
+             <Box mt='155'>
+              <Container >
                   <h1>Fases Cadastradas</h1>     
                   <ButtonGroup gap='4' mt='5'>
                     <Button onClick={onOpen} colorScheme='whatsapp'>Criar nova Fase</Button>
-                  </ButtonGroup>     
+                </ButtonGroup>     
+              
 
-                  
 
-
-                <Container  mWidth="100vw">
-                  <div>
-                  <Center py={6} ml={'450px'} width={'100%'}>
-                  {phases?.map((phase, index) => (  
-                 <Box
-                 m={6}
-                 key={index}
-                 minW={'300px'}
-                 maxW={'100%'}
-                 minH={'250px'}
-
-                 bg={'white'}
-                   boxShadow={'2xl'}
-                   rounded={'md'}
-                   overflow={'hidden'}>
-                   <Stack
-                     textAlign={'center'}
-                     p={6}
-                     color=""
-                     align={'center'}>
-                     <Stack direction={'row'} align={'center'} justify={'center'}>
-                       <Text fontSize='24px' fontWeight={800}>
-                       {phase?.phase_name}
-                       </Text>
-                     </Stack>
-                   </Stack>                   
-                   <Box  px={6} py={1}>
-                     {phase?.stages?.map((stage, index) => (
-                     <List key={index}
-                     spacing={3}>
-                       <ListItem key={index}  fontSize='14px'>                        
-                          - {stage.stage}
-                       </ListItem>
-                     </List>
-                     ))}
-                        <Box>
-                        <ButtonGroup gap='4' mt={12}>
-                            <Link to={`/phase/${phase?.id}`}>
-                                  <Button
-                                  w={'full'}
-                                  bg={'green.400'}
-                                  color={'white'}
-                                  rounded={'xl'}
-                                  boxShadow={'0 5px 20px 0px rgb(72 187 120 / 43%)'}
-                                  _hover={{
-                                    bg: 'green.500',
-                                  }}
-                                  _focus={{
-                                    bg: 'green.500',
-                                  }}>
-                                      Editar 
-                                  </Button>
-                              </Link>
-                            <Button colorScheme='blackAlpha' onClick={() => deletePhase(phase?.id)}>Excluir</Button>
-                          </ButtonGroup>
+                    <SimpleGrid
+                    width={'80vw'}
+                    columns={3} 
+                    spacing={10}       
+                    >
+                    {phases?.map((phase, index) => (  
+                        <Box
+                        m={6}
+                         key={index}
+                          bg={'white'}
+                           boxShadow={'2xl'}
+                          rounded={'md'}
+                          overflow={'hidden'}>
+                          <Stack
+                            textAlign={'center'}
+                            p={6}
+                            color=""
+                            align={'center'}>
+                            <Stack direction={'row'} align={'center'} justify={'center'}>
+                              <Text fontSize='24px' fontWeight={800}>
+                              {phase?.phase_name}
+                              </Text>
+                            </Stack>
+                          </Stack>                   
+                          <Box  px={6} py={1}>
+                            {phase?.stages?.map((stage, index) => (
+                            <List key={index}
+                            spacing={3}>
+                              <ListItem key={index}  fontSize='14px'>                        
+                                  - {stage.stage}
+                              </ListItem>
+                            </List>
+                            ))}
+                                <Box>
+                                <ButtonGroup gap='4' mt={12}>
+                                    <Link to={`/phase/${phase?.id}`}>
+                                          <Button
+                                          w={'full'}
+                                          bg={'green.400'}
+                                          color={'white'}
+                                          rounded={'xl'}
+                                          boxShadow={'0 5px 20px 0px rgb(72 187 120 / 43%)'}
+                                          _hover={{
+                                            bg: 'green.500',
+                                          }}
+                                          _focus={{
+                                            bg: 'green.500',
+                                          }}>
+                                              Editar 
+                                          </Button>
+                                      </Link>
+                                    <Button colorScheme='blackAlpha' onClick={() => deletePhase(phase?.id)}>Excluir</Button>
+                                  </ButtonGroup>
+                                </Box>
+                          </Box>
                         </Box>
-                   </Box>
-                 </Box>
-                      ))}             
-               </Center>
-                  </div>
+                          ))}             
+                    </SimpleGrid>
                  
-                  </Container>
                 
               </Container>
               </Box>    

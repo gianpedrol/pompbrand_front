@@ -33,7 +33,7 @@ const  Login = () => {
     }
   return (
     <Flex
-      H={'100vh'}
+      minH={'100vh'}
       align={'center'}
       justify={'center'}
       bg='#6E7C7C'>

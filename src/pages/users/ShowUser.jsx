@@ -16,7 +16,8 @@ import {
     Spinner,
     useToast,
     Checkbox, 
-    CheckboxGroup 
+    CheckboxGroup,
+    SimpleGrid,
   } from '@chakra-ui/react';
   import { CheckIcon } from '@chakra-ui/icons';
 
@@ -103,28 +104,6 @@ export default function ShowUser(){
         <>
       
         <Flex width="100%" minHeight="100vh">   
-       {
-         spinner && ( 
-           <div className="spinner">
-             <div>
-             <Spinner
-             position='absolute'
-             top='35%'
-             left='35%'
-             thickness='4px'
-             speed='0.65s'
-             bg='white'
-             emptyColor='gray.200'
-             color='blue.500'
-             size='xl'
-           /> 
-             </div>
-           </div>   
-   
-   
-       )
-      
-       }
         <Flex>
           <Header/>
         </Flex>
@@ -133,8 +112,10 @@ export default function ShowUser(){
         <Center py={6}>
             {user && (
                     <Box
-                    maxW={'530px'}
+                    maxW={'730px'}
                     w={'full'}
+                    mt={105}
+                    ml={55}
                    
                     boxShadow={'2xl'}
                     rounded={'md'}
@@ -145,30 +126,27 @@ export default function ShowUser(){
                     
                     align={'center'}>
                     <Stack direction={'row'} align={'center'} justify={'center'}>
-                    <Text
-                    fontSize={'sm'}
-                    fontWeight={500}
-                 
-                    p={2}
-                    px={3}
-                    color={'green.500'}
-                    rounded={'full'}>
-                    Usuário
-                    </Text>
                         <Text fontSize={'6xl'} fontWeight={800}>
                         {user.name}
                         </Text>
                     </Stack>
                     </Stack>
 
-                    <Box px={6} py={10}>
+                    <Box px={6} py={10}> 
+                    <SimpleGrid
+                    width={'80vw'}
+                    columns={3} 
+                    spacing={10}       
+                    >
                       {
                         userPhases.map((index) => (
                            <>
                            <div>
+                          {index.etapas.length > 0 ?
                            <Text>
                              {index.phase_name}
                            </Text>
+                            : ''}
                                  <Stack pl={6} mt={1} spacing={1}>
                                   <CheckboxGroup colorScheme='green'>
                                     <Stack >
@@ -185,13 +163,11 @@ export default function ShowUser(){
                                   </CheckboxGroup>
                                   </Stack> 
                                 
-                           </div>
-
-                          
+                           </div>                          
                             </>                          
                         ))
                       }
-                   
+                   </SimpleGrid>
 
                     <Button
                         mt={10}
