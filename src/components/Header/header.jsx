@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { 
     Flex, 
     Spacer,
+    Center,
     Box, 
     Button,
     Menu,
@@ -12,17 +13,12 @@ import {
     MenuGroup,
     MenuDivider,
 } from '@chakra-ui/react';
-import { HiMenuAlt3 } from "react-icons/hi";
-import { FaUserAlt, FaList } from "react-icons/fa";
 import { AuthContext } from "../../contexts/Auth";
 import Logo from '../../images/logo-sidebar.png';
-import { formatDate, formatHour } from "../../helpers";
 import './header.scss';
 
 
 const Header = () => {
-    const today = formatDate(new Date(), "extense");
-     const [currentHour] = useState(formatHour(new Date()));
     const [sidebar, setSidebar] = useState(true);
     const [ml, setMl] = useState('240px')
     const {logout} =useContext(AuthContext);
@@ -32,7 +28,7 @@ const Header = () => {
     }
 
     const handleSidebar = () => {
-        if(sidebar === true){
+        if(sidebar == true){
             setSidebar(false)
            let sidebar = document.getElementById('sidebar');
            sidebar.style.display = 'none';
@@ -50,7 +46,7 @@ const Header = () => {
         <div className="header">
         <Flex>
             <Box ml={ml} alignSelf='center'>
-                 <HiMenuAlt3 className="menu-icon " onClick={handleSidebar} />    
+                <h1 onClick={handleSidebar}> Abrir Fechar Menu</h1>    
             </Box>
             <Spacer />
             <Box p='4'>
@@ -90,27 +86,12 @@ const Header = () => {
                         <div className="links">
                             <ul>
                                 <li>
-                                 <Link to="/"><FaUserAlt/><span> Usuários</span></Link>
+                                    <a href=""> Link </a>
                                 </li>
                             </ul>
-                            <ul>
-                                <li>
-                                 <Link to="/phases"><FaList/><span> Fases </span></Link>
-                                </li>
-                            </ul>
-                            <div>
-
-                            <div className="footer-sidebar">
-                                <div className="horas">
-                                    <span className="horas-title">{currentHour}</span>
-                                    <span className="data-title">{today}</span>
-                                </div>
-                                
-                                <button className="logout" onClick={handleLogout} >
-                                    Logout
-                                </button>
-                            </div>
-                        </div>
+                        <button className="logout" onClick={handleLogout} >
+                            Logout
+                        </button>
                     </div>
                 </Box>
             </div>
