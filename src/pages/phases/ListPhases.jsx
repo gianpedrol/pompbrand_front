@@ -8,15 +8,12 @@ import { useEffect, useState } from "react";
 
 
 import {
-  Center,
   Text,
   Stack,
   List,
   ListItem,
-  ListIcon,
   useToast,
   Button,
-  useColorModeValue,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -139,7 +136,7 @@ export default function ListPhases() {
        <Header/>
      </Flex>
              <Box mt='155'>
-              <Container >
+              <Container>
                   <h1>Fases Cadastradas</h1>     
                   <ButtonGroup gap='4' mt='5'>
                     <Button onClick={onOpen} colorScheme='whatsapp'>Criar nova Fase</Button>

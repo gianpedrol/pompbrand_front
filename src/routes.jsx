@@ -6,6 +6,8 @@ import { AuthProvider, AuthContext } from './contexts/Auth'
 import ListPhases from "./pages/phases/ListPhases";
 import ShowPhase from "./pages/phases/ShowPhase";
 import ShowUser from "./pages/users/ShowUser";
+import MyAccount from "./pages/conta/MinhaConta";
+import HomeUser from "./pages/home/HomeUser";
 
 
 function Router() {
@@ -15,34 +17,45 @@ function Router() {
      const token = localStorage.getItem('token');
 
     if(token === null || user === false){
-        return <Navigate to="/login "/>
+        return <Navigate to="/"/>
     }
+
     return children;
 }
   return (
         <AuthProvider>
         <Routes>
-          <Route exact path='/login' element={<Login />}/>
-          <Route path='/' element={
-                  <Private>
-                      <HomeMaster />
-                  </Private>
-              } />
-              <Route path='/phases' element={
-                  <Private>
-                      <ListPhases />
-                  </Private>
-              } />
-             <Route path='/phase/:id' element={
-                  <Private>
-                      <ShowPhase />
-                  </Private>
-              } />
-            <Route path='/user/:id' element={
-                  <Private>
-                      <ShowUser />
-                  </Private>
-              } />
+              <Route exact path='/' element={<Login />}/>
+                <Route path='/dashboard' element={
+                        <Private>
+                            <HomeMaster />
+                        </Private>
+                    } />
+                    <Route path='/home/:id' element={
+                        <Private>
+                            <HomeUser />
+                        </Private>
+                    } />
+                    <Route path='/phases' element={
+                        <Private>
+                            <ListPhases />
+                        </Private>
+                    } />
+                    <Route path='/phase/:id' element={
+                        <Private>
+                            <ShowPhase />
+                        </Private>
+                    } />
+                <Route path='/user/:id' element={
+                        <Private>
+                            <ShowUser />
+                        </Private>
+                    } />
+                    <Route path='/conta/:id' element={
+                        <Private>
+                            <MyAccount />
+                        </Private>
+                    } />
          </Routes>
       </AuthProvider>
    

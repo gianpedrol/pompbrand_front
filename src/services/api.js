@@ -150,5 +150,40 @@ export const updateStageStatus = async (data) => {
    return response;    
 };
 
+export const createNewUserApi = async (data) => {
+  const token = localStorage.getItem("token");
+  const response = await api.post('create/user',data,{
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type' : 'application/json;charset=utf-8'
+    }
+  });
+
+ return response;
+    
+};
+
+export const deleteUserApi = async (id) => {
+  const token = localStorage.getItem("token");
+  const response = await api.delete(`delete/user/${id}`,{
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  });
+
+ return response;
+    
+};
+
+export const updateUserApi = async (id,data) => {
+  const token = localStorage.getItem("token");
+  const response = await api.put(`update/user/${id}`,data,{
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  });
+   return response;    
+};
+
 
 export default api;

@@ -28,7 +28,6 @@ export const AuthProvider = ({children}) => {
   const login = async (email, password) => {
     try {
       const response = await api.post("/login", {email, password})
-      console.log(response.data);
 
       const loggedUser = response.data.user;
       const token = response.data.token;
@@ -37,7 +36,13 @@ export const AuthProvider = ({children}) => {
       localStorage.setItem("token", token);
             
       setUser(loggedUser);
-      navigate("/");
+      
+      if(loggedUser.role_id === 2){
+        navigate(`/home/${loggedUser.id}`)
+      }
+      if(loggedUser.role_id === 1){
+        navigate("/dashboard")
+      }
       if (response.status === 200) {
         setAuthenticated(true);
         toast({
@@ -74,7 +79,7 @@ export const AuthProvider = ({children}) => {
      api.defaults.headers.Authorization = null 
      setUser(null);
      setAuthenticated(false);
-     navigate("/login");
+     navigate("/");
 
   }
 
