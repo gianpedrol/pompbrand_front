@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost/pompbrand-api/public/api"
+ // baseURL: "http://localhost/pompbrand_api/public/api"
+  baseURL: "https://pomp-brand-api.gianfrancopedrol.com.br/public/api"
 });
 
 api.interceptors.request.use(async (config) => {
@@ -10,9 +11,22 @@ api.interceptors.request.use(async (config) => {
   if (token) {
     axios.defaults.headers.Authorization = `Bearer ${token}`;
   }
-  axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
+  config.headers["Access-Control-Allow-Origin"] = "*";
   return config;
 });
+
+api.interceptors.response.use(
+  (response) => {
+    return Promise.resolve(response);
+  },
+  (error) => {
+    if (error?.response?.status === 401) {
+      // window.location.pathname = "/";
+    }
+
+    return Promise.reject(error);
+  },
+);
 
 export const getUsers = async (e) => {
   const token = localStorage.getItem("token");
@@ -185,5 +199,82 @@ export const updateUserApi = async (id,data) => {
    return response;    
 };
 
+export const forgotPasswordApi = async (data) => {
+  const response = await api.post('password/forgot',data);
+  return response;    
+};
+
+export const resetPasswordApi = async (data) => {
+  const response = await api.post('password/reset',data);
+  return response;    
+};
+
+export const getDocsUserApi = async (userId) => {
+  const token = localStorage.getItem("token");
+  const response = await api.get(`/doc/user/${userId}`,{
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  });
+
+   return response;
+    
+};
+
+export const uploadUserDocApi = async (data) => {
+  const token = localStorage.getItem("token");
+  const response = await api.post(`/upload/user/doc`, data,{
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  });
+  return response;
+};
+
+export const deleteDocumentApi = async (id) => {
+  const token = localStorage.getItem("token");
+  const response = await api.delete(`delete/doc/${id}`,{
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  });
+
+ return response;
+    
+};
+
+export const getFinanceUserApi = async (userId) => {
+  const token = localStorage.getItem("token");
+  const response = await api.get(`/finance/user/${userId}`,{
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  });
+
+   return response;
+    
+};
+
+export const uploadUserFinanceApi = async (data) => {
+  const token = localStorage.getItem("token");
+  const response = await api.post(`/upload/user/finance`, data,{
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  });
+  return response;
+};
+
+export const deleteFinanceApi = async (id) => {
+  const token = localStorage.getItem("token");
+  const response = await api.delete(`delete/finance/${id}`,{
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  });
+
+ return response;
+    
+};
 
 export default api;

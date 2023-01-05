@@ -7,7 +7,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    background-color:#6E7C7C;
+    background-color:#000;
 }
 
 .header p{
@@ -20,7 +20,7 @@ div.sidebar{
     position: sticky;
     top: 0;
     z-index: 9;
-    background: #6E7C7C ;
+    background: #000 ;
     max-height: 100vh;
     box-shadow: 0px 5.06787px 17.7376px rgba(0, 0, 0, 0.25);
     border-radius: 0px 15px 15px 0px;
@@ -42,7 +42,7 @@ div.sidebar{
         margin-bottom: 20px ;
       }
     button.logout{
-        background-color: #B4FE5B;
+        background-color: white;
         padding: 5px 30px;
         border-radius: 8px;
         text-align: center;
@@ -53,7 +53,7 @@ div.sidebar{
 
 .links{
     text-align: left;
-    color: #B4FE5B;
+    color: white;
     font-weight: 600;
     margin-top: 30px;
 }
@@ -79,7 +79,7 @@ ul li a span{
 
 .menu-icon{
     font-size: 30px;
-    color: #B4FE5B;
+    color: #1A25FF;
 }
 
 

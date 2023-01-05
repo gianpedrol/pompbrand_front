@@ -8,6 +8,9 @@ import ShowPhase from "./pages/phases/ShowPhase";
 import ShowUser from "./pages/users/ShowUser";
 import MyAccount from "./pages/conta/MinhaConta";
 import HomeUser from "./pages/home/HomeUser";
+import ForgotPassword from "./pages/resetSenha/ForgotPassword";
+import ResetPassword from "./pages/resetSenha/ResetPassword";
+
 
 
 function Router() {
@@ -26,6 +29,8 @@ function Router() {
         <AuthProvider>
         <Routes>
               <Route exact path='/' element={<Login />}/>
+              <Route exact path='/forgot-password' element={<ForgotPassword/>}/>
+              <Route exact path='/reset-password' element={<ResetPassword/>}/>
                 <Route path='/dashboard' element={
                         <Private>
                             <HomeMaster />

@@ -1,46 +1,44 @@
-import React,{useContext, useState} from "react";
+import React, { useContext, useState } from "react";
 import './login.scss';
+import { Link } from "react-router-dom";
 import {
   Flex,
   Box,
   FormControl,
   FormLabel,
   Input,
-  Checkbox,
   Stack,
-  Link,
   Button,
   Heading,
-  Text,
   useColorModeValue,
 } from '@chakra-ui/react';
 import { AuthContext } from "../../contexts/Auth";
 import Logo from '../../images/logo-sidebar.png'
 
-const  Login = () => {
+const Login = () => {
 
-  const {login, loading} = useContext(AuthContext);
+  const { login, loading } = useContext(AuthContext);
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
 
-        login(email, password);
-    }
+    login(email, password);
+  }
   return (
     <Flex
       minH={'100vh'}
       align={'center'}
       justify={'center'}
-      bg='#6E7C7C'>
+      bg='#000'>
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
         <Stack align={'center'}>
           <Heading fontSize={'4xl'}>
-          <img src={Logo} alt="" srcset="" />
-            </Heading>
+            <img src={Logo} alt="" srcset="" />
+          </Heading>
         </Stack>
         <Box
           as="form"
@@ -50,30 +48,29 @@ const  Login = () => {
           boxShadow={'lg'}
           p={8}>
           <Stack spacing={4}>
-              <FormControl id="email">
+            <FormControl id="email">
               <FormLabel>Email address</FormLabel>
-              <Input type="email"  value={email} onChange={(e) => setEmail(e.target.value)}/>
+              <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
             </FormControl>
             <FormControl id="password">
               <FormLabel>Password</FormLabel>
-              <Input type="password"  value={password} onChange={(e) => setPassword(e.target.value)} />
+              <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
             </FormControl>
             <Stack spacing={10}>
               <Stack
                 direction={{ base: 'column', sm: 'row' }}
                 align={'start'}
                 justify={'space-between'}>
-                <Checkbox>Remember me</Checkbox>
-                <Link color={'blue.400'}>Forgot password?</Link>
+                <Link to={"/forgot-password"} color={'blue.400'} >Forgot password?</Link>
               </Stack>
-              
+
               <Button
-              type="submit"
-                bg='#B4FE5B'
-                color='#6E7C7C'
+                type="submit"
+                bg='#1A25FF'
+                color='white'
                 _hover={{
                   bg: '#6E7C7C',
-                  color : 'white'
+                  color: 'white'
                 }}>
                 Sign in
               </Button>

@@ -1,37 +1,22 @@
 import React, { useState, useEffect } from "react";
 import Header  from "../../components/Header/Header";
 import { getUserInfo, updateStageStatus } from "../../services/api";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
     Flex,
     Box,
     Center,
     Text,
     Stack,
-    List,
-    ListItem,
-    ListIcon,
-    Button,
-    useColorModeValue,
-    Spinner,
     useToast,
     Checkbox, 
     CheckboxGroup,
     SimpleGrid,
-    FormControl,
-    FormLabel,
-    FormErrorMessage,
-    FormHelperText,
-    Input
   } from '@chakra-ui/react';
-  import { CheckIcon } from '@chakra-ui/icons';
-import { useContext } from "react";
-import { AuthContext } from "../../contexts/Auth";
 
 export default function HomeUser(){
     const toast = useToast();
     const { id: userId } = useParams();
-    const [spinner, setSpinner] = useState(false);
     const [user, setUser] = useState();
     const [checked, setCheck] = useState()
 
@@ -40,7 +25,6 @@ export default function HomeUser(){
 
 
     async function getUser() {
-        setSpinner(true);
         try {
           const user = await getUserInfo(userId); 
           console.log(user);          
@@ -53,12 +37,7 @@ export default function HomeUser(){
             ))
           ));
 
-          /*
-          userPhases.etapas.map((key, etapas ) => (
-              console.log(key,etapas)
-          ));*/
-
-
+   
           } catch (error) {
           console.log(error);
         } 
