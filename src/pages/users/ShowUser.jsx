@@ -418,7 +418,7 @@ export default function ShowUser() {
                           docs?.map((index) => (
                             <Stack divider={<StackDivider />} spacing='4'>
                               <Box pt='2' fontSize='12px'>
-                                <Button onClick={() => deleteFinance(index.id)} colorScheme='red' size='xs' marginRight={'20px'}>
+                                <Button onClick={() => deleteDoc(index.id)} colorScheme='red' size='xs' marginRight={'20px'}>
                                   delete
                                 </Button>
                                 <a href={index.file} >
