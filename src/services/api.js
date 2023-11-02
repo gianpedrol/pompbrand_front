@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const api = axios.create({
-  // baseURL: "http://localhost/pompbrand_api/public/api"
   //baseURL: "https://pomp-brand-api.gianfrancopedrol.com.br/public/api"
   baseURL: "https://eika-api.agenciaeika.com/public/api"
   
